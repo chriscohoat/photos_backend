@@ -155,3 +155,8 @@ LOGGING = {
         },
     }
 }
+
+if 'riot9_workspace' in os.getcwd():
+    from localsettings import *
+else:
+    from serversettings import *
