@@ -157,6 +157,8 @@ LOGGING = {
 }
 
 if 'riot9_workspace' in os.getcwd():
+    print "Running locally..."
     from localsettings import *
 else:
+    print "Running on server..."
     from serversettings import *
