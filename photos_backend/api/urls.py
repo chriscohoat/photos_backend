@@ -3,7 +3,7 @@ from django.conf.urls.defaults import *
 from piston.resource import Resource
 from piston.authentication import HttpBasicAuthentication
 
-from handlers import CreateAlbumHandler
+from handlers import *
 
 from django.conf import settings
 from django.http import HttpResponseRedirect
@@ -20,7 +20,9 @@ class CsrfExemptResource(Resource):
         self.csrf_exempt = getattr(self.handler, 'csrf_exempt', True)
 
 create_album = CsrfExemptResource(handler=CreateAlbumHandler, **no_auth)
+list_album = Resource(handler=ListAlbumHandler,**no_auth)
 
 urlpatterns = patterns('',
-                       url(r'^create/album/$', create_album),
+                       url(r'^album/create/$', create_album),
+                       url(r'^album/list/$', list_album),
                        )
