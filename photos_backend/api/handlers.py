@@ -6,7 +6,7 @@ from photos_backend.photos.models import *
 class ListAlbumHandler(BaseHandler):
     allowed_methods = ('GET')
     model = Album
-    fields = ('id','title',('photos',()))
+    fields = ('id','title',('photos',('id','relative_path',)))
     
     def read(self,request):
         

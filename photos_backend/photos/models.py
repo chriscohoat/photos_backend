@@ -5,3 +5,4 @@ class Album(models.Model):
     
 class Photo(models.Model):
     album = models.ForeignKey(Album,related_name='photos')
+    relative_path = models.CharField(max_length=500,null=True)
