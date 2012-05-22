@@ -24,6 +24,32 @@ class ListAlbumHandler(BaseHandler):
                 return {'error':'Album not found.'}
             return {'album':album}
 
+class AddToAlbumHandler(BaseHandler):
+    allowed_methods = ('POST')
+    
+    def create(self,request):
+        
+        try:
+            title = request.POST['album_title']
+            filename = request.POST['filename']
+        except:
+            return rc.BAD_REQUEST
+        
+        try:
+            album = Album.objects.get(title=title)
+        except:
+            return {'error':'Album not found.'}
+        
+        #Save to get unique ID
+        photo = Photo()
+        photo.album = album
+        photo.save()
+        
+        photo.relative_path = '/static/%s_%s' % (photo.id,filename)
+        photo.save()
+        
+        return {'album':album}
+
 class CreateAlbumHandler(BaseHandler):
     allowed_methods = ('POST')
     model = Album
