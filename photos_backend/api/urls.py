@@ -20,10 +20,12 @@ class CsrfExemptResource(Resource):
         self.csrf_exempt = getattr(self.handler, 'csrf_exempt', True)
 
 create_album = CsrfExemptResource(handler=CreateAlbumHandler, **no_auth)
+remove_from_album = CsrfExemptResource(handler=RemoveFromAlbumHandler, **no_auth)
 add_to_album = CsrfExemptResource(handler=AddToAlbumHandler, **no_auth)
 list_album = Resource(handler=ListAlbumHandler,**no_auth)
 
 urlpatterns = patterns('',
+                       url(r'^album/remove/$', remove_from_album),
                        url(r'^album/create/$', create_album),
                        url(r'^album/add/$', add_to_album),
                        url(r'^album/list/$', list_album),
